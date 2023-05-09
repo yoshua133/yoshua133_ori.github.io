@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .item {
+            margin: 10px;
+            width: calc(33% - 20px);
+            box-sizing: border-box;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        video {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Demo</h1>
+        <p>Check out my demo video, photos, and description below.</p>
+    </header>
+    <div class="container">
+        <div class="item">
+            <h2>Demo Video</h2>
+            <video controls>
+                <source src="path/to/your/video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="item">
+            <h2>Photos</h2>
+            <img src="path/to/your/photo1.jpg" alt="Photo 1">
+            <img src="path/to/your/photo2.jpg" alt="Photo 2">
+        </div>
+        <div class="item">
+            <h2>Description</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras porttitor metus justo, ut volutpat nibh porta a. Vestibulum a ante eget erat accumsan eleifend. Fusce at odio vitae nulla scelerisque congue. Pellentesque et neque urna.</p>
+        </div>
+    </div>
+</body>
+</html>

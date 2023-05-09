@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicAvatar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding-bottom: 5 px;
+        }
+        h1 {
+            margin-bottom: 5px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 10px;
+        }
+        .item {
+            margin: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* text-align: center; */
+        }
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .column {
+            width: calc(50% - 20px);
+            max-height: 500px;
+            margin: 10px;
+        }
+        .video_column {
+            max-width: calc(50% - 20px);
+            max-height: 400px;
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        .video_large {
+            /* max-width: calc(50% - 20px); */
+            max-height: 400px;
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-bottom: 10px;
+            padding: 20px;
+        }
+        .small_img {
+            display: flex;
+            max-width: 40%;
+            max-height: 700px;
+            height: auto;
+            padding: 50px; /* Add padding around the edges of the images */
+            box-sizing: border-box; 
+        }
+        .large_img {
+            max-width: 100%;
+            height: auto;
+            max-height: 800px; /*  Set the maximum height for the images */
+            object-fit: cover; /* Crop the images if their aspect ratio doesn't fit the given dimensions */
+            padding: 50px; /* Add padding around the edges of the images */
+            box-sizing: border-box; /* Include padding and border in an element's total width and height */
+            display: flex;
+        }
+        video {
+            max-width: 100%;
+            height: auto;
+        }
+        .media-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DynamicAvatar</h1>
+        <h5> <em>--Drive your realistic avatar using text prompt</em></h5>
+        <p>Dawei Xiang</p>
+    </header>
+    <div class="container">
+        <div class="item">
+            <h2>Abstract</h2>
+            We present a text to human avatar pipeline called DynamicAvatar. Our model could generate realistic human avatar motion from text prompt. 
+            The whole pipeline is composed with two steps: firstly, we use the text-to-motion model to generate human motion sequence based on 
+            a short text description; secondly, we reconstruct a human avatar from a monocular video filming a person's outlook.
+            Compared to the baseline model(SelfRecon), our new Render Net could greatly reduce the distortion caused by monotonic training
+            data.
+            <!-- The input are a self-rotating video and a text prompt to describe a motion. 
+            We reconstruct the human avatar from the self-rotating video and generate a sequence of human motion from the text prompt. 
+            Then we drive the human avatar to do the motions. -->
+        </div>
+        <div class="item">
+            <h2>Pipeline</h2>
+                    <img class="large_img" src="./pipeline.png" alt="Photo abs">
+        </div>
+
+        <div class="item">
+            <h2>Introsduction</h2>
+            Human avatar reconstruction has a great application filed in VR/AR, meta verse, film and Video Game Production。 
+            It aims to generate a 3d reconstruction model of a person from a monocular or multi view video.
+            After reconstructing the 3d human model, a major application is to drive the model to do some actions. 
+            But people with little 3d animation knowledge, it’s hard for them to manually manipulate 
+            the avatar to move as they wish. 
+            So our motivation is to generate motion sequence based on text prompt and drive the reconstructed avatar 
+            to do these motions. Thus even though you have no prior knowledge, you can still generate a 3d animation with
+            a customized avatar. 
+        </div>
+
+        <div class="item">
+            <h2>Method</h2>
+            The whole pipeline is composed with two parts: 1. text-to-motion and 2. avatar reconstruction. For the first part, we used
+            Motion Diffusion model from [1]. For the second part, we have designed a new Rendering model based on SelfRecon [2]
+            <p> 
+                Because in the training video, the model mainly 
+                learnt how the predict the color along horizontal direction. 
+                The distribution of “viewing direction” is not balanced, it concentrates on a horizontal direction. Therefore
+                when viewing from another direction, it will constantly predict a distorted color.
+            </p>
+
+            <p> 
+                We proposed a dynamic weighted render net, which can greatly reduce the color distortion. Following is the 
+                comparison with baseline.
+            </p>
+        </div>
+        <h2>compare with baseline</h2>
+        <div class="media-container">
+            
+            <video class="video_column"  controls>
+                <source src="./compare.mov" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img class="small_img" src="./image_compare.png" alt="Photo abs">
+        </div>
+        <div class="item">
+            <h2>Videos</h2>
+
+            <div class="two-columns">
+                <video class="video_column"  controls>
+                    <source src="./chacha.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video class="video_column"  controls>
+                    <source src="./dance_spin.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="two-columns">
+                <video class="video_column"  controls>
+                    <source src="./walk_around.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video class="video_column"  controls>
+                    <source src="./dance_spin.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+
+
+            <!-- <video controls>
+                <source src="./chacha.mov" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video controls>
+                <source src="path/to/your/video2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video> -->
+        </div>
+    </div>
+</body>
+</html>
