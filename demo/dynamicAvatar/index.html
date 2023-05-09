@@ -25,7 +25,20 @@
             margin: 10px;
         }
         .item {
-            margin: 10px;
+            margin-left: 200px;
+            margin-right: 200px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* text-align: center; */
+        }
+        .large_item {
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-bottom: 10px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -112,7 +125,7 @@
         </div>
 
         <div class="item">
-            <h2>Introsduction</h2>
+            <h2>Introduction</h2>
             Human avatar reconstruction has a great application filed in VR/AR, meta verse, film and Video Game Production。 
             It aims to generate a 3d reconstruction model of a person from a monocular or multi view video.
             After reconstructing the 3d human model, a major application is to drive the model to do some actions. 
@@ -148,7 +161,7 @@
             </video>
             <img class="small_img" src="./image_compare.png" alt="Photo abs">
         </div>
-        <div class="item">
+        <div class="large_item">
             <h2>Videos</h2>
 
             <div class="two-columns">
@@ -167,7 +180,7 @@
                     Your browser does not support the video tag.
                 </video>
                 <video class="video_column"  controls>
-                    <source src="./dance_spin.mov" type="video/mp4">
+                    <source src="./chn_dance.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
