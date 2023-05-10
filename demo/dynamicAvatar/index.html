@@ -98,6 +98,12 @@
             align-items: center;
             gap: 20px;
         }
+        .reference {
+            font-size: 0.8em;
+            vertical-align: super;
+            display: inline;
+        }
+
 
     </style>
 </head>
@@ -110,11 +116,11 @@
     <div class="container">
         <div class="item">
             <h2>Abstract</h2>
-            We present a text to human avatar pipeline called DynamicAvatar. Our model could generate realistic human avatar motion from text prompt. 
-            The whole pipeline is composed with two steps: firstly, we use the text-to-motion model to generate human motion sequence based on 
-            a short text description; secondly, we reconstruct a human avatar from a monocular video filming a person's outlook.
-            Compared to the baseline model(SelfRecon), our new Render Net could greatly reduce the distortion caused by monotonic training
-            data.
+            We introduce a text-to-human-avatar pipeline, DynamicAvatar. Our model could generate realistic human avatar motion from text prompt. 
+            This pipeline consists of two primary stages: first, we employ a text-to-motion model to create a human motion sequence 
+            derived from a brief text description; second, we reconstruct a human avatar using a monocular video capturing 
+            an individual's appearance. Our innovative Render Net significantly minimizes distortion 
+            resulting from monotonous training data when compared to the baseline model[2].
             <!-- The input are a self-rotating video and a text prompt to describe a motion. 
             We reconstruct the human avatar from the self-rotating video and generate a sequence of human motion from the text prompt. 
             Then we drive the human avatar to do the motions. -->
@@ -123,63 +129,73 @@
             <h2>Pipeline</h2>
                     <img class="large_img" src="./pipeline.png" alt="Photo abs">
         </div>
-
+        
         <div class="item">
+            
             <h2>Introduction</h2>
-            Human avatar reconstruction has a great application filed in VR/AR, meta verse, film and Video Game Production。 
-            It aims to generate a 3d reconstruction model of a person from a monocular or multi view video.
-            After reconstructing the 3d human model, a major application is to drive the model to do some actions. 
-            But people with little 3d animation knowledge, it’s hard for them to manually manipulate 
-            the avatar to move as they wish. 
-            So our motivation is to generate motion sequence based on text prompt and drive the reconstructed avatar 
-            to do these motions. Thus even though you have no prior knowledge, you can still generate a 3d animation with
-            a customized avatar. 
+            Human avatar reconstruction has vast applications in fields such as VR/AR, the metaverse, film, and 
+            video game production. The primary goal is to create a 3D reconstruction of a person using monocular or 
+            multi-view video. Once the 3D human model is reconstructed, a key application involves 
+            animating the model to perform specific actions.
+            
+            However, for individuals with little or no 3D animation experience, manually manipulating the 
+            avatar's movements can be challenging. Our solution addresses this issue by generating motion sequences 
+            based on text prompts and animating the reconstructed avatar accordingly. This approach allows users 
+            without prior knowledge to effortlessly create customized 3D animations featuring their avatars.
+
         </div>
 
         <div class="item">
             <h2>Method</h2>
             The whole pipeline is composed with two parts: 1. text-to-motion and 2. avatar reconstruction. For the first part, we used
-            Motion Diffusion model from [1]. For the second part, we have designed a new Rendering model based on SelfRecon [2]
+            Motion Diffusion model from [1]. For the second part, we have designed a new Rendering model based on SelfRecon[2].
+            <video class="video_column"  controls loop autoplay muted>
+                <source src="./text2motion.mov" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
             <p> 
                 Because in the training video, the model mainly 
                 learnt how the predict the color along horizontal direction. 
-                The distribution of “viewing direction” is not balanced, it concentrates on a horizontal direction. Therefore
-                when viewing from another direction, it will constantly predict a distorted color.
+
+                This results in an unbalanced distribution of the "viewing direction". And it concentrates on a horizontal direction. 
+                Consequently, when the model is employed to predict from a different view direction which doesn't appear in training set,
+                it tends to produce color distortions.
             </p>
 
             <p> 
-                We proposed a dynamic weighted render net, which can greatly reduce the color distortion. Following is the 
-                comparison with baseline.
+                To rectify this issue, we have proposed a dynamic weighted render net. 
+                This innovative approach significantly mitigates color distortion. 
+                The subsequent section presents a comparison with the baseline model.
             </p>
         </div>
         <h2>compare with baseline</h2>
         <div class="media-container">
             
-            <video class="video_column"  controls>
+            <video class="video_column"  controls loop autoplay muted>
                 <source src="./compare.mov" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <img class="small_img" src="./image_compare.png" alt="Photo abs">
         </div>
         <div class="large_item">
-            <h2>Videos</h2>
+            <h2>Demo videos</h2>
 
             <div class="two-columns">
-                <video class="video_column"  controls>
+                <video class="video_column"  controls loop autoplay muted>
                     <source src="./chacha.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <video class="video_column"  controls>
+                <video class="video_column"  controls loop autoplay muted>
                     <source src="./dance_spin.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="two-columns">
-                <video class="video_column"  controls>
+                <video class="video_column"  controls loop autoplay muted>
                     <source src="./walk_around.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <video class="video_column"  controls>
+                <video class="video_column"  controls loop autoplay muted>
                     <source src="./chn_dance.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -196,6 +212,22 @@
                 Your browser does not support the video tag.
             </video> -->
         </div>
+        <section>
+            <h2>References</h2>
+            <ol>
+              <li id="ref1">
+                Human Motion Diffusion Model. 
+                Tevet, Guy and Raab, Sigal and Gordon, Brian and Shafir, Yonatan and Bermano, Amit H and Cohen-Or, Daniel. ICML 2023.
+              </li>
+              <li id="ref2">
+                SelfRecon: Self Reconstruction Your Digital Avatar from Monocular Video. 
+                Boyi Jiang and Yang Hong and Hujun Bao and Juyong Zhang. CVPR 2022.
+            </li>
+            </ol>
+        </section>
     </div>
+    
+
+      
 </body>
 </html>
